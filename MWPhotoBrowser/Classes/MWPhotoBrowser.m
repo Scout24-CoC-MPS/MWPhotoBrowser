@@ -1138,6 +1138,17 @@
     }
 }
 
+- (void)handleSingleTap {
+    BOOL customReaction = NO;
+    if ([self.delegate respondsToSelector:@selector(photoBrowser:customReactionToSingleTapAtIndex:)]) {
+        customReaction = [self.delegate photoBrowser:self
+                             customReactionToSingleTapAtIndex:self.currentIndex];
+    }
+    if (!customReaction) {
+        [self toggleControls];
+    }
+}
+
 #pragma mark - Grid
 
 - (void)showGridAnimated {

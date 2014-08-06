@@ -107,6 +107,9 @@
 - (void)gotoPreviousPage;
 - (void)gotoNextPage;
 
+// Interactions
+- (void)handleSingleTap;
+
 // Grid
 - (void)showGrid:(BOOL)animated;
 - (void)hideGrid;

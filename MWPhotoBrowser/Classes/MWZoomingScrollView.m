@@ -365,9 +365,10 @@
 	
 	// Zoom
 	if (self.zoomScale != self.minimumZoomScale && self.zoomScale != [self initialZoomScaleWithMinScale]) {
-		
-		// Zoom out
-		[self setZoomScale:self.minimumZoomScale animated:YES];
+
+        // Zoom out
+        CGFloat scale = _photoBrowser.zoomPhotosToFill  ? [self initialZoomScaleWithMinScale] : self.minimumZoomScale;
+        [self setZoomScale:scale animated:YES];
 		
 	} else {
 		

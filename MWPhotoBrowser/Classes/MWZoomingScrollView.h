@@ -21,6 +21,8 @@
 @property (nonatomic) id <MWPhoto> photo;
 @property (nonatomic, weak) MWCaptionView *captionView;
 @property (nonatomic, weak) UIButton *selectedButton;
+@property (nonatomic, strong) MWTapDetectingImageView *photoImageView;
+
 
 - (id)initWithPhotoBrowser:(MWPhotoBrowser *)browser;
 - (void)displayImage;

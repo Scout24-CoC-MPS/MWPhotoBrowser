@@ -224,53 +224,48 @@
 }
 
 - (void)setMaxMinZoomScalesForCurrentBounds {
-    
+
     // Reset
     self.maximumZoomScale = 1;
     self.minimumZoomScale = 1;
     self.zoomScale = 1;
-    
+
     // Bail if no image
     if (_photoImageView.image == nil) return;
-    
+
     // Reset position
     _photoImageView.frame = CGRectMake(0, 0, _photoImageView.frame.size.width, _photoImageView.frame.size.height);
-	
+
     // Sizes
     CGSize boundsSize = self.bounds.size;
     CGSize imageSize = _photoImageView.image.size;
-    
+
     // Calculate Min
     CGFloat xScale = boundsSize.width / imageSize.width;    // the scale needed to perfectly fit the image width-wise
     CGFloat yScale = boundsSize.height / imageSize.height;  // the scale needed to perfectly fit the image height-wise
     CGFloat minScale = MIN(xScale, yScale);                 // use minimum of these to allow the image to become fully visible
-    
+
     // Calculate Max
     CGFloat maxScale = 3;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         // Let them go a bit bigger on a bigger screen!
         maxScale = 4;
     }
-    
+
+    if (maxScale < minScale) {
+        maxScale = minScale - 0.1f;
+    }
+
     // Set min/max zoom
     self.maximumZoomScale = maxScale;
     self.minimumZoomScale = minScale;
-    
+
     // Initial zoom
     self.zoomScale = [self initialZoomScaleWithMinScale];
-    
-    // If we're zooming to fill then centralise
-    if (self.zoomScale != minScale) {
-        
-        // Centralise
-        self.contentOffset = CGPointMake((imageSize.width * self.zoomScale - boundsSize.width) / 2.0,
-                                         (imageSize.height * self.zoomScale - boundsSize.height) / 2.0);
 
-    }
-    
     // Disable scrolling initially until the first pinch to fix issues with swiping on an initally zoomed in photo
     self.scrollEnabled = NO;
-    
+
     // If it's a video then disable zooming
     if ([self displayingVideo]) {
         self.maximumZoomScale = self.zoomScale;
@@ -278,7 +273,7 @@
     }
 
     // Layout
-	[self setNeedsLayout];
+    [self setNeedsLayout];
 
 }
 

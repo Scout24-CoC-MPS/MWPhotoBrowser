@@ -252,6 +252,7 @@
         maxScale = 4;
     }
 
+    // this is done to prevent the image from jumping after maximizing and zooming back
     if (maxScale < minScale) {
         maxScale = minScale - 0.1f;
     }

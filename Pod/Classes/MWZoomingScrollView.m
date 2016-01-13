@@ -14,6 +14,8 @@
 #import "MWPhotoBrowserPrivate.h"
 #import "UIImage+MWPhotoBrowser.h"
 
+static const NSInteger kAdBannerView = 2999;
+
 // Private methods and properties
 @interface MWZoomingScrollView () {
     
@@ -110,6 +112,13 @@
     }
     _photo = photo;
     UIImage *img = [_photoBrowser imageForPhoto:_photo];
+	if ([_photo respondsToSelector:@selector(adBannerView)]) {
+		UIView *bannerView = [_photo performSelector:@selector(adBannerView)];
+		if (bannerView && ![_photoImageView viewWithTag:kAdBannerView]) {
+			bannerView.tag = kAdBannerView;
+			[_photoImageView addSubview:bannerView];
+		}
+	}
     if (img) {
         [self displayImage];
     } else {
@@ -321,7 +330,11 @@
 	// Center
 	if (!CGRectEqualToRect(_photoImageView.frame, frameToCenter))
 		_photoImageView.frame = frameToCenter;
-	
+
+	UIView *bannerView = [self viewWithTag:kAdBannerView];
+	if (bannerView) {
+		bannerView.frame = _photoImageView.bounds;
+	}
 }
 
 #pragma mark - UIScrollViewDelegate

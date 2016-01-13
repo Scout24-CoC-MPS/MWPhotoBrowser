@@ -782,24 +782,6 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     if (iLastIndex < 0) iLastIndex = 0;
     if (iLastIndex > [self numberOfPhotos] - 1) iLastIndex = [self numberOfPhotos] - 1;
 	
-	// Recycle no longer needed pages
-    NSInteger pageIndex;
-	for (MWZoomingScrollView *page in _visiblePages) {
-        pageIndex = page.index;
-		if (pageIndex < (NSUInteger)iFirstIndex || pageIndex > (NSUInteger)iLastIndex) {
-			[_recycledPages addObject:page];
-            [page.captionView removeFromSuperview];
-            [page.selectedButton removeFromSuperview];
-            [page.playButton removeFromSuperview];
-            [page prepareForReuse];
-			[page removeFromSuperview];
-			MWLog(@"Removed page at index %lu", (unsigned long)pageIndex);
-		}
-	}
-	[_visiblePages minusSet:_recycledPages];
-    while (_recycledPages.count > 2) // Only keep 2 recycled pages
-        [_recycledPages removeObject:[_recycledPages anyObject]];
-	
 	// Add missing pages
 	for (NSUInteger index = (NSUInteger)iFirstIndex; index <= (NSUInteger)iLastIndex; index++) {
 		if (![self isDisplayingPageForIndex:index]) {

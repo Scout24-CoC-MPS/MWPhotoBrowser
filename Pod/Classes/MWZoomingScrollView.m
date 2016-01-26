@@ -116,6 +116,7 @@ static const NSInteger kAdBannerView = 2999;
 		UIView *bannerView = [_photo performSelector:@selector(adBannerView)];
 		if (bannerView && ![_photoImageView viewWithTag:kAdBannerView]) {
 			bannerView.tag = kAdBannerView;
+			bannerView.transform = CGAffineTransformIdentity;
 			[_photoImageView addSubview:bannerView];
 		}
 	}
@@ -321,8 +322,8 @@ static const NSInteger kAdBannerView = 2999;
 	UIView *bannerView = [self viewWithTag:kAdBannerView];
 	if (bannerView) {
 		self.clipsToBounds = YES;
-		frameToCenter.size.width = bannerView.frame.size.width;
-		frameToCenter.size.height = bannerView.frame.size.height;
+		//frameToCenter.size.width = bannerView.frame.size.width;
+		//frameToCenter.size.height = bannerView.frame.size.height;
 	}
 
     // Horizontally
@@ -347,7 +348,10 @@ static const NSInteger kAdBannerView = 2999;
 		NSLog(@"bannerView: %@, imageFrame: %@", NSStringFromCGRect(bannerView.frame), NSStringFromCGRect(frameToCenter));
 		frameToCenter.origin.x = 0.0f;
 		frameToCenter.origin.y = 0.0f;
-		bannerView.frame = frameToCenter;
+		bannerView.center = CGPointMake(frameToCenter.size.width/2, frameToCenter.size.height/2);
+		CGFloat scaleFactor = _photoImageView.frame.size.width / bannerView.frame.size.width;
+		bannerView.autoresizesSubviews = NO;
+		bannerView.transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 	}
 }
 

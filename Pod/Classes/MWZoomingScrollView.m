@@ -340,6 +340,7 @@ static const NSInteger kAdBannerView = 2999;
 	UIView *bannerView = [self viewWithTag:kAdBannerView];
 	if (bannerView) {
 		self.clipsToBounds = YES;
+		bannerView.transform = CGAffineTransformIdentity;
 		bannerView.center = CGPointMake(frameToCenter.size.width/2, frameToCenter.size.height/2);
 		CGFloat scaleFactor = _photoImageView.frame.size.width / bannerView.frame.size.width;
 		bannerView.autoresizesSubviews = NO;

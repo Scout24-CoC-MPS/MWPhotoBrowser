@@ -319,13 +319,6 @@ static const NSInteger kAdBannerView = 2999;
     CGSize boundsSize = self.bounds.size;
     CGRect frameToCenter = _photoImageView.frame;
 
-	UIView *bannerView = [self viewWithTag:kAdBannerView];
-	if (bannerView) {
-		self.clipsToBounds = YES;
-		//frameToCenter.size.width = bannerView.frame.size.width;
-		//frameToCenter.size.height = bannerView.frame.size.height;
-	}
-
     // Horizontally
     if (frameToCenter.size.width < boundsSize.width) {
         frameToCenter.origin.x = floorf((boundsSize.width - frameToCenter.size.width) / 2.0f);
@@ -344,10 +337,9 @@ static const NSInteger kAdBannerView = 2999;
 	if (!CGRectEqualToRect(_photoImageView.frame, frameToCenter))
 		_photoImageView.frame = frameToCenter;
 
+	UIView *bannerView = [self viewWithTag:kAdBannerView];
 	if (bannerView) {
-		NSLog(@"bannerView: %@, imageFrame: %@", NSStringFromCGRect(bannerView.frame), NSStringFromCGRect(frameToCenter));
-		frameToCenter.origin.x = 0.0f;
-		frameToCenter.origin.y = 0.0f;
+		self.clipsToBounds = YES;
 		bannerView.center = CGPointMake(frameToCenter.size.width/2, frameToCenter.size.height/2);
 		CGFloat scaleFactor = _photoImageView.frame.size.width / bannerView.frame.size.width;
 		bannerView.autoresizesSubviews = NO;

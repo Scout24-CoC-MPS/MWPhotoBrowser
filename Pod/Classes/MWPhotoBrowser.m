@@ -554,7 +554,7 @@ static void * MWVideoPlayerObservation = &MWVideoPlayerObservation;
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
 

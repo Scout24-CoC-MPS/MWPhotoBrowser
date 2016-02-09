@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class IS24AdBannerView;
+
 // Notifications
 #define MWPHOTO_LOADING_DID_END_NOTIFICATION @"MWPHOTO_LOADING_DID_END_NOTIFICATION"
 #define MWPHOTO_PROGRESS_NOTIFICATION @"MWPHOTO_PROGRESS_NOTIFICATION"
@@ -53,6 +55,8 @@
 - (void)unloadUnderlyingImage;
 
 @optional
+
+@property (nonatomic, strong) IS24AdBannerView *adBannerView;
 
 // If photo is empty, in which case, don't show loading error icons
 @property (nonatomic) BOOL emptyImage;

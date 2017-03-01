@@ -118,6 +118,11 @@ static const NSInteger kAdBannerView = 2999;
 			bannerView.tag = kAdBannerView;
 			bannerView.transform = CGAffineTransformIdentity;
 			[_photoImageView addSubview:bannerView];
+            
+            NSLayoutConstraint *centerXConstr = [NSLayoutConstraint constraintWithItem:bannerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_photoImageView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+            NSLayoutConstraint *centerYConstr = [NSLayoutConstraint constraintWithItem:bannerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_photoImageView attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+            
+            [_photoImageView addConstraints:@[centerXConstr,centerYConstr]];
 		}
 	}
     if (img) {

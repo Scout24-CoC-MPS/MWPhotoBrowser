@@ -216,7 +216,7 @@
     // Navigation buttons
     if ([self.navigationController.viewControllers objectAtIndex:0] == self) {
         // We're first on stack so show done button
-        _doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonPressed:)];
+        _doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", nil) style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonPressed:)];
         // Set appearance
         if ([UIBarButtonItem respondsToSelector:@selector(appearance)]) {
             [_doneButton setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
@@ -226,7 +226,7 @@
             [_doneButton setTitleTextAttributes:[NSDictionary dictionary] forState:UIControlStateNormal];
             [_doneButton setTitleTextAttributes:[NSDictionary dictionary] forState:UIControlStateHighlighted];
         }
-        self.navigationItem.rightBarButtonItem = _doneButton;
+        self.navigationItem.leftBarButtonItem = _doneButton;
     } else {
         // We're not first so show back button
         UIViewController *previousViewController = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
@@ -379,9 +379,6 @@
         [self storePreviousNavBarAppearance];
     }
     [self setNavBarAppearance:animated];
-    
-    // Update UI
-	[self hideControlsAfterDelay];
     
     // Initial appearance
     if (!_viewHasAppearedInitially) {
@@ -1045,11 +1042,6 @@
         [self didStartViewingPageAtIndex:index];
     }
 	
-}
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-	// Hide controls when dragging begins
-	[self setControlsHidden:YES animated:YES permanent:NO];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

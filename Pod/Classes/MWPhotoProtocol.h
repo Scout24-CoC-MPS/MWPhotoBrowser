@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class IS24AdBannerView;
+@class DFPBannerView;
 
 // Notifications
 #define MWPHOTO_LOADING_DID_END_NOTIFICATION @"MWPHOTO_LOADING_DID_END_NOTIFICATION"
@@ -56,7 +56,7 @@
 
 @optional
 
-@property (nonatomic, strong) IS24AdBannerView *adBannerView;
+@property (nonatomic, strong) DFPBannerView *adBannerView;
 
 // If photo is empty, in which case, don't show loading error icons
 @property (nonatomic) BOOL emptyImage;
